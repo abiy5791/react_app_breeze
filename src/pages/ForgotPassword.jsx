@@ -54,10 +54,10 @@ const ForgotPassword = () => {
                 </div>
               )}
               <div className="mb-10 text-center md:mb-16">
-                <h1>
+                <h6>
                   Forgot your password ? ok don't worry please write you email
                   we will send reset link on your email !
-                </h1>
+                </h6>
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">

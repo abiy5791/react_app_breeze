@@ -1,76 +1,79 @@
 import { Outlet, Navigate, Link } from "react-router-dom";
 import useAuthContext from "../context/AuthContext";
+import { MenuIcon, XIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 
 const AuthLayout = () => {
   const { user, logout } = useAuthContext();
+  const [isOpen, setIsOpen] = useState(false);
   return user ? (
     <>
-      <nav className="bg-indigo-900 text-white px-2 py-2.5 sm:px-4">
-        <div className="container mx-auto flex flex-wrap items-center justify-between">
-          <a href="/" className="flex items-center">
-            Qr-Menu
-          </a>
-
-          <div className="hidden w-full md:block md:w-auto">
-            <ul
-              className="
-            mt-4
-            flex flex-col
-            rounded-lg
-            p-4
-            md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium
+      <nav className="bg-white shadow-lg">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex justify-between">
+            <div className="flex space-x-7">
+              <div>
+                <Link to="/categories" className="flex items-center py-2 px-2">
+                  <span className="font-semibold text-gray-500 text-lg">
+                    QrMenu
+                  </span>
+                </Link>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center space-x-1">
+              <button
+                onClick={logout}
+                className="
+            w-full
+            px-4
+            py-1.5
+            bg-indigo-500
+            hover:bg-red-400
+            rounded-md
+            text-white
           "
-            >
-              {user ? (
-                <>
-                  <li>
-                    <Link
-                      to="/"
-                      className="block rounded py-2 pr-4 pl-3 text-white"
-                      aria-current="page"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={logout}
-                      className="block rounded py-2 pr-4 pl-3 text-white"
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li>
-                    <Link
-                      to="/login"
-                      className="block rounded py-2 pr-4 pl-3 text-white"
-                      aria-current="page"
-                    >
-                      Login
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/register"
-                      className="block rounded py-2 pr-4 pl-3 text-white"
-                      aria-current="page"
-                    >
-                      Register
-                    </Link>
-                  </li>
-                </>
-              )}
-            </ul>
+              >
+                Logout
+              </button>
+            </div>
+            <div className="md:hidden flex items-center">
+              <button
+                className="outline-none mobile-menu-button"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? (
+                  <XIcon className="w-6 h-6 text-gray-500 hover:text-green-500" />
+                ) : (
+                  <MenuIcon className="w-6 h-6 text-gray-500 hover:text-green-500" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
+        {isOpen && (
+          <div className="mobile-menu">
+            <button
+              onClick={logout}
+              className="
+          ml-7
+          px-4
+          py-1.5
+          bg-indigo-500
+          hover:bg-red-400
+          rounded-md
+          text-white
+        "
+            >
+              Logout
+            </button>
+          </div>
+        )}
       </nav>
+
       <Outlet />
     </>
   ) : (
-    <Navigate to={"/login"} />
+    <Navigate to={"/categoryitems"} />
   );
 };
 

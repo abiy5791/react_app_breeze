@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
     if (!user) {
       getUser();
     }
-  });
+  }, []);
 
   return (
     <AuthContext.Provider

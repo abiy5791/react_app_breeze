@@ -84,7 +84,7 @@ const ResetPassword = () => {
               )}
 
               <div className="mb-10 text-center md:mb-16">
-                <h1>Add Your New Password</h1>
+                <h6>Add Your New Password</h6>
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="mb-4 relative">
